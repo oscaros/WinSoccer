@@ -2,3 +2,35 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.heading_wrapper{
+  position:relative;
+}
+
+.headline{
+  font-size: 18px;
+  font-weight:500;
+}
+
+.news_type{
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.time_ago{
+  font-size: 10px;
+  font-weight: 100;
+}
+
+.news_image{
+  margin: 6px 10px;
+  height:0;
+  position:relative;
+}
+
+#sub_detail{
+  font-size: 12px;
+  font-weight: 200;
+  margin: 6px 15px;
+}
+
