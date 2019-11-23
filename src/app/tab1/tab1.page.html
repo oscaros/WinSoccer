@@ -20,6 +20,7 @@
           <ion-label class="headline">{{Ct.title}}</ion-label>
           <ion-label class="news_type">Latest news</ion-label>
           <ion-label class="time_ago">{{Ct.publishedAt}}</ion-label>
+          <ion-label class="time_ago">{{timeDifference('2019-11-22T22:34:43Z',Ct.publishedAt)}}</ion-label>
         </div>
       </ion-item>
       <ion-item lines="none">
@@ -30,6 +31,7 @@
 
       <div class="ion-text-justify" id="sub_detail">
        {{Ct.description}}
+       <ion-button (click)="viewDetail()" ng-if="Ct != {}"> Read More</ion-button>
       </div>
 
       <div>
