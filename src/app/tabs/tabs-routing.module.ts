@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { DataResolverService } from '../data-resolver.service';
 
 const routes: Routes = [
   {
@@ -57,6 +58,21 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/tabs/tab1',
+    pathMatch: 'full'
+  },
+  {
+    path: 'newsdetail',
+    loadChildren: () =>
+    import('../newsdetail/newsdetail.module').then(m => m.NewsdetailPageModule),
+    pathMatch: 'full'
+  },
+  {
+    path: 'newsdetail/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: () =>
+    import('../newsdetail/newsdetail.module').then(m => m.NewsdetailPageModule),
     pathMatch: 'full'
   }
 ];
