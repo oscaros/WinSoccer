@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { DataResolverService } from '../data-resolver.service';
-
 const routes: Routes = [
   {
     path: 'tabs',
@@ -66,15 +64,12 @@ const routes: Routes = [
     import('../newsdetail/newsdetail.module').then(m => m.NewsdetailPageModule),
     pathMatch: 'full'
   },
-  {
-    path: 'newsdetail/:id',
-    resolve: {
-      special: DataResolverService
-    },
-    loadChildren: () =>
-    import('../newsdetail/newsdetail.module').then(m => m.NewsdetailPageModule),
-    pathMatch: 'full'
-  }
+  // {
+  //   path: 'newsdetail/:id',   
+  //   loadChildren: () =>
+  //   import('../newsdetail/newsdetail.module').then(m => m.NewsdetailPageModule),
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

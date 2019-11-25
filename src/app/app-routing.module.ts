@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DataResolverService } from './data-resolver.service';
 
 const routes: Routes = [
   {
@@ -8,13 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   { path: 'newsdetail', loadChildren: './newsdetail/newsdetail.module#NewsdetailPageModule' },
-  {
-    path: 'newsdetail/:id',
-    resolve: {
-      special: DataResolverService
-    },
-    loadChildren: './newsdetail/newsdetail.module#NewsdetailPageModule'
-  }
+  // {
+  //   path: 'newsdetail/:id',
+  //   loadChildren: './newsdetail/newsdetail.module#NewsdetailPageModule'
+  // }
 ];
 @NgModule({
   imports: [

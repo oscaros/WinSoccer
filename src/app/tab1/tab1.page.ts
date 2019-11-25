@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavController } from '@ionic/angular'
-import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class Tab1Page {
   //urlend= '&from='+today1+'&to='+today1+'&sortBy=popularity&language=en&apiKey=bb27f1860f904aa681bb7bb4f478db50'
   urlend = '&from=' + this.fromValue + '&to=' + this.toValue + '&sortBy=publishedAt&language=en&apiKey=bb27f1860f904aa681bb7bb4f478db50'
 
-  constructor(public http: HttpClient, public sanitizer: DomSanitizer, public navCtrl: NavController, private router: Router, private dataService: DataService) {
+  constructor(public http: HttpClient, public sanitizer: DomSanitizer, public navCtrl: NavController, private router: Router, private storage: Storage) {
     // const newsapi = this.NewsAPI('bb27f1860f904aa681bb7bb4f478db50');
 
     // newsapi.v2.everything({
@@ -120,12 +120,25 @@ export class Tab1Page {
 
   }
 
-  viewDetail(title, publishedAt, description,content, urlToImage, url, source) {
-    console.log(source)
-    //this.navCtrl.navigateRoot('newsdetail');
+  async viewDetail(title, publishedAt, description,content, urlToImage, url, source) {
+    
+     // set a key/value
+    
 
-    this.dataService.setData(42, this.user);
-    this.router.navigateByUrl('/newsdetail/42');
+     var detail = {
+      title: title,
+      publishedAt: publishedAt,
+      description: description,
+      content: content,
+      urlToImage: urlToImage,
+      url: url,
+      source: source
+    };   
+
+     
+     this.storage.set('name', detail);
+     this.navCtrl.navigateRoot('newsdetail');
+
   }
 
   public timeDifference(previous) {    
