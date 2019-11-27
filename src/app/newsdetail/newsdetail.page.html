@@ -8,39 +8,37 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
+<!-- <ion-list>
   <ion-item-sliding *ngFor="let Ct of data">
     <ion-item href="https://www.arsenal.com/">
       <ion-thumbnail slot="start">
-        <!-- <ion-img
+        <ion-img
             src="{{ Ct.urlToImage }}">
-        </ion-img> -->
+        </ion-img>
       </ion-thumbnail>
-      <!-- <div class="heading_wrapper">
-        <ion-label class="headline">{{Ct}}</ion-label>
-        
-      </div> -->
+      <div class="heading_wrapper">
+        <ion-label class="headline">{{Ct.title}}</ion-label>        
+      </div>
     </ion-item>
     <ion-item lines="none">
-      <!-- <ion-img
+      <ion-img
         src="{{ Ct.urlToImage }}">
-      </ion-img> -->
-      {{Ct.title}}
+      </ion-img>          
+      
     </ion-item>
-
-    <!-- <div class="ion-text-justify" id="sub_detail">
-     {{Ct.description}}
-     <ion-tem [href]="/newsdetail" routerDirection="forward"></ion-tem>
-     <ion-button (click)="viewDetail(Ct.title, Ct.publishedAt, Ct.description, Ct.content, Ct.urlToImage, Ct.url, Ct.source.name)" ng-if="Ct != {}"> Read More</ion-button>
-    </div> -->
-
-    <div>
-      <!-- ads will show here -->
+    <div class="ion-text-justify" id="sub_detail">
+     {{Ct.description}}       
     </div>
+    <div class="ion-text-justify" id="sub_detail">
+      {{Ct.content}}       
+     </div>
+    <div>
+      <!-ads will show here -->
+    <!-- </div>
     <hr>
 
   </ion-item-sliding>
-</ion-list>
+</ion-list> --> 
 <!-- 
 <ion-list>
   <ion-item-sliding *ngFor="let Ct of arrayVideoFeed">
@@ -56,4 +54,20 @@
         </ion-item>
   </ion-item-sliding>
 </ion-list> --> 
+<div class='detailDiv' *ngFor='let Ct of data'>
+    <iframe class='detailIframe' id='nn' width='100%' height='100%'  [src]='sanitizer.bypassSecurityTrustResourceUrl(Ct.url)'></iframe>
+</div>
+<script>
+window.onload=function(){
+    var ifr=document.getElementById('id');
+    ifr.onload=function(){
+        this.style.display='block';
+        console.log('laod the iframe')
+    };
+    var btn=document.getElementById('click');    
+    btn.onclick=function(){
+        ifr.src='https://heera.it';    
+    };
+};
+</script>
 </ion-content>

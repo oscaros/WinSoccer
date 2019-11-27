@@ -30,8 +30,10 @@
 
       <div class="ion-text-justify" id="sub_detail">
        {{Ct.description}}
-       <ion-button (click)="viewDetail(Ct.title, Ct.publishedAt, Ct.description, Ct.content, Ct.urlToImage, Ct.url, Ct.source.name)" ng-if="Ct != {}"> Read More</ion-button>
+       <!-- <ion-button (click)="viewDetail(Ct.title, Ct.publishedAt, Ct.description, Ct.content, Ct.urlToImage, Ct.url, Ct.source.name)" ng-if="Ct != {}"> Read More</ion-button> -->
       </div>
+      <!-- <ion-button href="{{Ct.url}}"> Read More</ion-button> -->
+      <ion-button class="small_btn" (click)="viewDetail(Ct.title, Ct.publishedAt, Ct.description, Ct.content, Ct.urlToImage, Ct.url, Ct.source.name)" ng-if="Ct != {}"> Read More</ion-button>
 
       <div>
         <!-- ads will show here -->

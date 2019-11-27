@@ -120,12 +120,10 @@ export class Tab1Page {
 
   }
 
-  async viewDetail(title, publishedAt, description,content, urlToImage, url, source) {
-    
-     // set a key/value
-    
-
-     var detail = {
+  async viewDetail(title, publishedAt, description, content, urlToImage, url, source) {    
+     // set a key/value    
+     var detail = [
+     {
       title: title,
       publishedAt: publishedAt,
       description: description,
@@ -133,15 +131,14 @@ export class Tab1Page {
       urlToImage: urlToImage,
       url: url,
       source: source
-    };   
-
-     
+    },   
+  ];        
      this.storage.set('name', detail);
      this.navCtrl.navigateRoot('newsdetail');
 
   }
 
-  public timeDifference(previous) {    
+  public timeDifference(previous) {  
 
     var myDate = new Date();
     var current1 = myDate.getTime();
