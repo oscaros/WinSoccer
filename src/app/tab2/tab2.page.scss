@@ -1,1 +1,48 @@
+.date{
+  font-size: 13px;
+  font: weight 500;
+  font-family: 'FuturalPTBoldCondensed';
+  white-space: normal;
+  text-align: justify;
+  margin: 0px 10px;
+}
 
+.news_type{
+  font-size: 13px;
+  font-weight: 200;
+  margin: 4px 0px;
+}
+
+.divInline{
+	
+	font-size: 13px;
+	font: weight 600;
+	font-family: 'FuturalPTLight';
+	margin: 4px 4px;	
+	white-space: normal;
+	background-color: #00ffb2;
+	position: absolute;    
+    width: 60%;
+    height: 20px;
+}
+
+.divInline2{
+
+	font-size: 13px;
+	font: weight 600;
+	font-family: 'FuturalPTLight';
+	margin: 14px 4px;
+	white-space: normal;
+	position: absolute;
+	width: 40%;
+	height: 20px;	
+	right: 0px;
+	background-color: #09c88e;
+}
+
+.iGrid{
+	position: relative;
+	width: 100%;
+	height: 40px;
+	background-color:#fcfcfc
+}

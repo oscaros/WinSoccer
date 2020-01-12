@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NavController } from '@ionic/angular'
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Network } from '@ionic-native/network/ngx';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab1Page {
 
+  arrayNewsFeed: any[];
   arrayVideoFeed: any[];
   //  NewsAPI = require('newsapi');
   sourcesArray = ["goal.com", "football365.com", "101greatgoals.com", "fourfourtwo.com",
@@ -23,18 +25,18 @@ export class Tab1Page {
   toValue: any;
   fromValue: any;
 
-  user = {
-    name: 'Simon Grimm',
-    website: 'www.ionicacademy.com',
-    address: {
-      zip: 48149,
-      city: 'Muenster',
-      country: 'DE'
-    },
-    interests: [
-      'Ionic', 'Angular', 'YouTube', 'Sports'
-    ]
-  };
+  // user = {
+  //   name: 'Simon Grimm',
+  //   website: 'www.ionicacademy.com',
+  //   address: {
+  //     zip: 48149,
+  //     city: 'Muenster',
+  //     country: 'DE'
+  //   },
+  //   interests: [
+  //     'Ionic', 'Angular', 'YouTube', 'Sports'
+  //   ]
+  // };
 
 
   // current= new Date('2011/05/24');
@@ -43,7 +45,33 @@ export class Tab1Page {
   //urlend= '&from='+today1+'&to='+today1+'&sortBy=popularity&language=en&apiKey=bb27f1860f904aa681bb7bb4f478db50'
   urlend = '&from=' + this.fromValue + '&to=' + this.toValue + '&sortBy=publishedAt&language=en&apiKey=bb27f1860f904aa681bb7bb4f478db50'
 
-  constructor(public http: HttpClient, public sanitizer: DomSanitizer, public navCtrl: NavController, private router: Router, private storage: Storage) {
+  constructor(public http: HttpClient, public sanitizer: DomSanitizer, public navCtrl: NavController, private router: Router, private storage: Storage, private network: Network) {
+    // watch network for a disconnection
+let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+  console.log('network was disconnected :-(');
+});
+
+// stop disconnect watch
+disconnectSubscription.unsubscribe();
+
+
+// watch network for a connection
+let connectSubscription = this.network.onConnect().subscribe(() => {
+  console.log('network connected!');
+  // We just got a connection but we need to wait briefly
+   // before we determine the connection type. Might need to wait.
+  // prior to doing any api requests as well.
+  setTimeout(() => {
+    if (this.network.type === 'wifi') {
+      console.log('we got a wifi connection, woohoo!');
+    }
+  }, 3000);
+});
+
+// stop connect watch
+connectSubscription.unsubscribe();
+
+
     // const newsapi = this.NewsAPI('bb27f1860f904aa681bb7bb4f478db50');
 
     // newsapi.v2.everything({
@@ -86,7 +114,7 @@ export class Tab1Page {
    console.log(today);*/
     //today1 = today;
 
-
+//subscribe to the news feed
     var i: number;
     for (i = 0; i < this.sourcesArray.length; i++) {
       this.getNewsFeed(this.sourcesArray[i]).subscribe(res => {
@@ -95,14 +123,31 @@ export class Tab1Page {
           if (res.articles == null) {
 
           } else {
-            this.arrayVideoFeed = res.articles.concat(this.arrayVideoFeed)
+            this.arrayNewsFeed = res.articles.concat(this.arrayNewsFeed)
           }
         }
         console.log(res);
 
       })
     }
-  }
+
+     //subscribe to the video feed
+     this.getVideoFeed().subscribe(res => {
+      if (res.error) throw new Error(res.error);
+      else {
+        if (res == null) {
+        } else {
+          this.arrayVideoFeed = res.concat(this.arrayVideoFeed)
+        }
+      }
+      console.log(res);
+    })
+   
+
+  } //end constructor
+
+ 
+
 
   getVideoFeed(): Observable<any> {
     let host = "free-football-soccer-videos.p.rapidapi.com"
@@ -179,6 +224,39 @@ export class Tab1Page {
     }
   }
 
+//handlers for pull to refresh
+ionRefresh(event) {
+  console.log('Pull Event Triggered!');
+  setTimeout(() => {
+//subscribe to the news feed
+    var i: number;
+    for (i = 0; i < this.sourcesArray.length; i++) {
+      this.getNewsFeed(this.sourcesArray[i]).subscribe(res => {
+        if (res.error) throw new Error(res.error);
+        else {
+          if (res.articles == null) {
 
+          } else {
+            this.arrayNewsFeed.length = 0;
+            this.arrayNewsFeed = res.articles.concat(this.arrayNewsFeed)
+          }
+        }
+        console.log(res);
 
+      })
+    }
+
+    console.log('Async operation has ended');
+    //complete()  signify that the refreshing has completed and to close the refresher
+    event.target.complete();
+  }, 2000);
+}
+ionPull(event){
+//Emitted while the user is pulling down the content and exposing the refresher.
+console.log('ionPull Event Triggered!');
+}
+ionStart(event){
+//Emitted when the user begins to start pulling down.
+console.log('ionStart Event Triggered!');
+}
 }
