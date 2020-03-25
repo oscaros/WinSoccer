@@ -5,3 +5,64 @@
 .detailDiv {
     height: 100%;
 }
+
+
+.welcome-card img {
+    max-height: 35vh;
+    overflow: hidden;
+  }
+  
+  .heading_wrapper{
+    position:relative;
+  }
+  
+  .headline{
+    font-size: 15px;
+    font: weight 900;
+    font-family: 'FuturalPTBoldCondensed';
+    white-space: normal;
+    text-align: justify;
+  }
+  
+  .news_type{
+    font-size: 13px;
+    font-weight: 200;
+  }
+  
+  .time_ago{
+    font-size: 12px;
+    font-weight: 100;
+    font-family: 'FuturalPTLight';
+  }
+
+  .read_full{
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'FuturalPTLight';
+  }
+  
+  .news_image{
+    margin: 6px 10px;
+    height:0;
+    position:relative;
+  }
+  
+  #sub_detail{
+    font-size: 15px;
+    font-weight: 200;
+    margin: 6px 15px;
+    text-align: justify;
+    font-family: 'FuturalPTLight';
+  }
+  
+  .small_btn{
+    border: none;
+    color: white;
+    padding: 5px 18px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 0px 0px;
+  }
+  
+  

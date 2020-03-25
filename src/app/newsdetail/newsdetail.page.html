@@ -1,6 +1,6 @@
 <ion-header>
 <ion-toolbar>
-  <ion-title>newsdetail</ion-title>
+  <ion-title>News Detail</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs"></ion-back-button>
   </ion-buttons>
@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-<!-- <ion-list>
+
   <ion-item-sliding *ngFor="let Ct of data">
-    <ion-item href="https://www.arsenal.com/">
+    <ion-item href="#">
       <ion-thumbnail slot="start">
         <ion-img
             src="{{ Ct.urlToImage }}">
@@ -23,38 +23,26 @@
     <ion-item lines="none">
       <ion-img
         src="{{ Ct.urlToImage }}">
-      </ion-img>          
-      
+      </ion-img>
+    </ion-item>
+    <ion-item>
+      <ion-label class="time_ago">{{Ct.source}}</ion-label> 
+      <ion-label class="time_ago">{{timeDifference(Ct.publishedAt)}}</ion-label> 
     </ion-item>
     <div class="ion-text-justify" id="sub_detail">
      {{Ct.description}}       
     </div>
-    <div class="ion-text-justify" id="sub_detail">
-      {{Ct.content}}       
-     </div>
+     <ion-item class="read_full" (click)="openWebPage(Ct.url)"> Read Full Story From {{Ct.source}}</ion-item>
     <div>
-      <!-ads will show here -->
-    <!-- </div>
+      <!--ads will show here -->
+     </div>
     <hr>
 
   </ion-item-sliding>
-</ion-list> --> 
-<!-- 
-<ion-list>
-  <ion-item-sliding *ngFor="let Ct of arrayVideoFeed">
-      <ion-item>
-          <ion-label>{{Ct.title}}
 
-          <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(Ct.embed.substring(13, 57))' width='100%' height='490px'  style='width:100%;height:490px;overflow:hidden;display:block;' class='_scorebatEmbeddedPlayer_'>
-          </iframe>
-          <video [src]='sanitizer.bypassSecurityTrustResourceUrl(Ct.embed.substring(13, 57))'></video> -->
-          <!-- <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://www.scorebat.com/embed/embed.js?v=mto'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'scorebat-jssdk'));</script> -->
-<!--          
-          </ion-label>
-        </ion-item>
-  </ion-item-sliding>
-</ion-list> --> 
-<div class='detailDiv' *ngFor='let Ct of data'>
+
+
+<!-- <div class='detailDiv' *ngFor='let Ct of data'>
     <iframe class='detailIframe' id='nn' width='100%' height='100%'  [src]='sanitizer.bypassSecurityTrustResourceUrl(Ct.url)'></iframe>
 </div>
 <script>
@@ -69,5 +57,5 @@ window.onload=function(){
         ifr.src='https://heera.it';    
     };
 };
-</script>
+</script> -->
 </ion-content>
